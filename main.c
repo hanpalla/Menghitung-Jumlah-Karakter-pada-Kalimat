@@ -14,13 +14,15 @@ void separator(){
             c++;
         }
         else{
-            if(tanpaSpasi[i] == 97 || tanpaSpasi[i] == 101  || tanpaSpasi[i] == 105  || tanpaSpasi[i] == 111  || tanpaSpasi[i] == 117){
-                vokal[a] = tanpaSpasi[i];
-                a++;
-            }
-            else{
-                konsonan[b] = tanpaSpasi[i];
-                b++;
+            if(tanpaSpasi[i] >= 97 && tanpaSpasi[i] <= 122){
+                if(tanpaSpasi[i] == 97 || tanpaSpasi[i] == 101  || tanpaSpasi[i] == 105  || tanpaSpasi[i] == 111  || tanpaSpasi[i] == 117){
+                    vokal[a] = tanpaSpasi[i];
+                    a++;
+                }
+                else{
+                    konsonan[b] = tanpaSpasi[i];
+                    b++;
+                }
             }
         }
     }
@@ -51,11 +53,20 @@ void cetak(int x){
     }
 }
 
+int cari(char x){
+    for(int i = 0; tanpaSpasi[i] != '\0'; i++){
+        if(x == tanpaSpasi[i])
+            return 1;
+    }
+    return 0;
+}
+
 int main(){
     int i, j = 0;
+    char input;
 
     system("cls");
-    printf("PROGRAM MENGHITUNG JUMLAH KARAKTER PADA KALIMAT.\n\n");
+    printf("PROGRAM MENCARI KARAKTER PADA KALIMAT.\n\n");
     printf("Input Kalimat\t\t\t: " );
     gets(kalimat);
 
@@ -82,6 +93,16 @@ int main(){
 
     printf("Karakter Numerik\t\t: %d\t= ", c);
     cetak(2);
+
+    printf("\nInput Karakter yang dicari\t: ");
+    scanf("%c", &input);
+    input = tolower(input);
+
+    int flag = cari(input);
+    if(flag == 1)
+        printf("Karakter ditemukan.");
+    else
+        printf("Karakter tidak ditemukan.");
 
     return 0;
 }
